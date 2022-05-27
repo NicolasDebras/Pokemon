@@ -1,11 +1,10 @@
-
 .background-combat {
-    top: -10%;
+    top: -50%;
     left: 00%;
     width: 800px;
-    position: relative;
-    
+    position: relative;    
 }
+
 .div2 {
     position: absolute;
     top: 0%;
@@ -20,4 +19,3 @@
     left: 12%;
     width: 400px;
 }
-

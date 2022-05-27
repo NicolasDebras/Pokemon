@@ -9,7 +9,13 @@ export class FightActionComponent implements OnInit {
 
   constructor() { }
 
+  nom_attaque = ""
+  items : number = 0;
+
   ngOnInit(): void {
+
+    this.nom_attaque = "queue de fer";
+    this.items = 4
   }
 
 }
