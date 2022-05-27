@@ -1,0 +1,13 @@
+.firstPokemon {
+    position: relative;
+    top: 20%;
+    left: 20%
+}
+.secondPokemon {
+    position: relative;
+    top: -20%;
+    left: -20%
+}
+.background-combat {
+    background-image: url("../../assets/img/Battle-Background2.png")
+}

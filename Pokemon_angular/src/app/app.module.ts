@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { PokemonComponent } from './pokemon/pokemon.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FightActionComponent } from './fight-action/fight-action.component';
+import { PokemonFightComponent } from './pokemon-fight/pokemon-fight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonComponent,
-    FightActionComponent
+    FightActionComponent,
+    PokemonFightComponent
   ],
   imports: [
     BrowserModule,
