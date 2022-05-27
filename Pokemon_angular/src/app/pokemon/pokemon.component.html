@@ -2,6 +2,12 @@
   <img src={{url_pokemon}} class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{nom_pokemon | titlecase }}</h5>
+    <div class="container">
+      <div class="row row-cols-2">
+        <div class="col"><img src="../../assets/img/heart.gif" class="heart"></div>
+        <div class="col">{{pokemon_pv}}</div>
+      </div>
+    </div>
     <!--<p class="card-text">Des détails</p>-->
   </div>
 </div>
