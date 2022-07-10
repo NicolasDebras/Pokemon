@@ -1,0 +1,10 @@
+body {
+    background-image: url("../../assets/img/back.jfif");
+    background-position: center center;
+    background-repeat:no-repeat;
+    background-size: 95%;
+}
+
+.test {
+    width: watcher;
+}

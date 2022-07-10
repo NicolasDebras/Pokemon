@@ -1,0 +1,14 @@
+<mat-card class="info">
+    <mat-card-title>{{nom_pokemon | uppercase}}</mat-card-title>
+    <mat-card-subtitle>lv {{lvl}}</mat-card-subtitle>
+        <mat-card-content>
+            <mat-grid-list cols="4" rowHeight="3vh">
+                <mat-grid-tile>
+                    <img class="heart" src="../../assets/img/heart.gif">
+                </mat-grid-tile>
+                <mat-grid-tile colspan="3">
+                    <mat-progress-bar mode="determinate" value="{{value}}" color="warn"></mat-progress-bar>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+</mat-card>

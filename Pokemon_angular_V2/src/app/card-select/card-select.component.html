@@ -1,0 +1,19 @@
+<mat-card class="select">
+    <mat-card-title-group>
+        <mat-card-title>CHOIX POKEMON {{num}}</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+        <app-input-choose (newItemEvent)="selectPokemon($event)"></app-input-choose>
+        <app-card-select-pokemon *ngIf="selectpokemonB" [selectPokemon]="id"></app-card-select-pokemon>
+        <mat-grid-list cols="2" rowHeight="5vh" *ngIf="selectpokemonB">
+            <mat-grid-tile>
+                <mat-slider *ngIf="selectpokemonB" (change)="changeLVL(value)" class="example-margin" [max]="100" [min]="1" [step]="1"
+                    [thumbLabel]="thumbLabel" [(ngModel)]="value" aria-labelledby="example-name-label">
+                </mat-slider>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p>LVL : {{value}}</p>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>

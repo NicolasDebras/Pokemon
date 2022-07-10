@@ -1,0 +1,14 @@
+<mat-grid-list cols="4" rowHeight="80vh">
+    <mat-grid-tile colspan="3" class="test">
+        <div class="picturepokemon">
+            <img src={{url_pokemon1}} class="img-top1">
+            <img src={{url_pokemon2}} class="img-top">
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="card">
+            <app-cardinfopokemon></app-cardinfopokemon>
+            <app-cardinfopokemon [back]="true"></app-cardinfopokemon>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

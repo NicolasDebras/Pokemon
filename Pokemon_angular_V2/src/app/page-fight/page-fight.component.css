@@ -1,0 +1,31 @@
+.card {
+    size: 150%;
+}
+
+.img-top {
+    Width : 30vh;
+    height : auto;
+    top: 50%;
+    left: -10%;
+    position: relative;
+}
+.img-top1 {
+    Width : 30vh;
+    height : auto;
+    top: 20%;
+    left: 60%;
+    position: relative;
+}
+
+.test {
+    background-image: url("../../assets/img/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-style: solid;
+}
+
+.picturepokemon {
+    height: 95%;
+    width: 80%;
+    
+}

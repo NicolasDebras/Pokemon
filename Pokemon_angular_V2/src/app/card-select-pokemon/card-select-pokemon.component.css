@@ -1,0 +1,8 @@
+.select {
+    max-width: 400px;
+    margin-bottom: 8px;
+}
+.back {
+    background-color: #616161;
+    border-radius: 10px;
+}
