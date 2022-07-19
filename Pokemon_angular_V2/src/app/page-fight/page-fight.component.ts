@@ -40,6 +40,7 @@ export class PageFightComponent implements OnInit {
       },
       error: console.error
     })
+
     this.service.getPokemonData((this.id2.split('-')[0])).subscribe({
       next: response => {
         this.fight.setData2(response)
@@ -55,6 +56,9 @@ export class PageFightComponent implements OnInit {
       },
       error: console.error
     })
+
+    setTimeout(() => { this.ngOnInit() }, 1000 * 10)
+
 
   }
 }
