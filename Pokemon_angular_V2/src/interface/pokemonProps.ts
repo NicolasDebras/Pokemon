@@ -196,3 +196,8 @@ export interface pokemonfight {
     php1 : number;
     currenthp1 : number;
 }
+
+export interface MovesPokemon {
+    name : string;
+    attack : number;
+}

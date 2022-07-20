@@ -18,6 +18,7 @@ export class PageFightComponent implements OnInit {
   @Input() back = false
   url_pokemon1: string = ""
   url_pokemon2: string = ""
+  alive_pokemon1 : boolean = true
 
   constructor(private router: Router, private service: PokemonAPIService
     , private fight: PokemonFightService) { }
@@ -55,9 +56,10 @@ export class PageFightComponent implements OnInit {
       error: console.error
     })
 
-    setTimeout(() => { console.log(this.fight.Fight1_sub.currenthp1)
+    
+    //console.log(this.fight.Fight1_sub.currenthp1)
     this.fight.test()
-    console.log('test') }, 100 * 10)
+    console.log('test')
 
 
   }

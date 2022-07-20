@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Pokemon, pokemonfight } from 'src/interface/pokemonProps';
+import { MovesPokemon, Pokemon, pokemonfight } from 'src/interface/pokemonProps';
 import { Subject, Observable, BehaviorSubject, pipe, observable, map } from 'rxjs';
 import { PokemonAPIService } from './pokemon-api.service';
 
@@ -17,6 +17,10 @@ export class PokemonFightService {
 
   Fight1_sub!: pokemonfight;
   Fight2_sub!: pokemonfight;
+
+  play: boolean = false
+
+  private list: MovesPokemon[] = [{ name: "charge", attack: 10 }]
 
   sharedData$: Observable<Pokemon> = this.Pokemon1.asObservable();
   sharedData2$: Observable<Pokemon> = this.Pokemon2.asObservable();
@@ -47,35 +51,29 @@ export class PokemonFightService {
 
   toto: number = 10;
 
-  attack1to2() {
-    console.log("putaon")
-    let count = this.Pokemon1_sub.moves.length;
-    let te = Math.random() * (count - 1 - 0) + 0
-    let attck = this.Pokemon1_sub.moves[3] // a changer 
-    this.service.getMovesData(attck.move.url).subscribe(moves => {
-      console.log(moves)
-
-      console.log(this.Fight2_sub)
-      if (this.Fight2_sub.currenthp1 > 0)
-        return
+  async test(): Promise<Observable<Pokemon>> {
+    let ob = new Observable<Pokemon>()
+    while (!this.play) {
       this.setDataFight2({
         lvl1: this.Fight2_sub.lvl1,
         maxhp1: this.Fight2_sub.maxhp1,
-        php1: ((this.Fight2_sub.currenthp1 - moves.power) * 100) / this.Fight2_sub.maxhp1,
-        currenthp1: this.Fight2_sub.currenthp1 - moves.power
+        php1: ((this.Fight2_sub.currenthp1 - this.list[0].attack) * 100) / this.Fight2_sub.maxhp1,
+        currenthp1: this.Fight2_sub.currenthp1 - 10
       })
-    })
-  }
-
-  test(): Observable<Pokemon> {
-    let ob = new Observable<Pokemon>()
-    this.attack1to2()
-    this.setDataFight2({
-      lvl1: this.Fight2_sub.lvl1,
-      maxhp1: this.Fight2_sub.maxhp1,
-      php1: 10,
-      currenthp1: this.Fight2_sub.currenthp1 - 10
-    })
+      if (this.Fight2_sub.currenthp1 < 0) {
+        this.play = true
+      }
+      await new Promise(f => setTimeout(f, 1000));
+      this.setDataFight({
+        lvl1: this.Fight1_sub.lvl1,
+        maxhp1: this.Fight1_sub.maxhp1,
+        php1: ((this.Fight1_sub.currenthp1 - this.list[0].attack) * 100) / this.Fight1_sub.maxhp1,
+        currenthp1: this.Fight1_sub.currenthp1 - 10
+      })
+      if (this.Fight1_sub.currenthp1 < 0) {
+        this.play = true
+      }
+    }
     console.log(this.Fight2_sub.currenthp1)
     return ob
 
