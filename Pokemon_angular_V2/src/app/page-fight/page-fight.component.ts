@@ -7,7 +7,8 @@ import { PokemonFightService } from 'src/service/pokemonFight.service';
 @Component({
   selector: 'app-page-fight',
   templateUrl: './page-fight.component.html',
-  styleUrls: ['./page-fight.component.css']
+  styleUrls: ['./page-fight.component.css'],
+  providers: [PokemonFightService]
 })
 export class PageFightComponent implements OnInit {
 
