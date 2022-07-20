@@ -44,7 +44,6 @@ export class PageFightComponent implements OnInit {
     this.service.getPokemonData((this.id2.split('-')[0])).subscribe({
       next: response => {
         this.fight.setData2(response)
-        console.log(response)
         this.url_pokemon2 = response.sprites.back_default;
         this.fight.setDataFight2({
           lvl1: this.id2.split('-')[1],
@@ -52,12 +51,13 @@ export class PageFightComponent implements OnInit {
           php1: 100,
           currenthp1: response.stats[0].base_stat,
         })
-        this.fight.attack1to2();
       },
       error: console.error
     })
 
-    setTimeout(() => { this.ngOnInit() }, 1000 * 10)
+    setTimeout(() => { console.log(this.fight.Fight1_sub.currenthp1)
+    this.fight.test()
+    console.log('test') }, 100 * 10)
 
 
   }
