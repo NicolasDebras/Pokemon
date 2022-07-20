@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MovesPokemon, Pokemon, pokemonfight } from 'src/interface/pokemonProps';
+import { listFight, MovesPokemon, Pokemon, pokemonfight } from 'src/interface/pokemonProps';
 import { Subject, Observable, BehaviorSubject, pipe, observable, map } from 'rxjs';
 import { PokemonAPIService } from './pokemon-api.service';
 
@@ -11,6 +11,12 @@ export class PokemonFightService {
   private Pokemon2: Subject<Pokemon> = new Subject<Pokemon>();
   private Fight1: Subject<pokemonfight> = new Subject<pokemonfight>();
   private Fight2: Subject<pokemonfight> = new Subject<pokemonfight>();
+  sharedData$: Observable<Pokemon> = this.Pokemon1.asObservable();
+  sharedData2$: Observable<Pokemon> = this.Pokemon2.asObservable();
+  shareFight$: Observable<pokemonfight> = this.Fight1.asObservable();
+  shareFight2$: Observable<pokemonfight> = this.Fight2.asObservable();
+  
+  listAction : listFight[] = []
 
   Pokemon1_sub!: Pokemon
   Pokemon2_sub!: Pokemon
@@ -22,11 +28,7 @@ export class PokemonFightService {
 
   private list: MovesPokemon[] = [{ name: "charge", attack: 10 }]
 
-  sharedData$: Observable<Pokemon> = this.Pokemon1.asObservable();
-  sharedData2$: Observable<Pokemon> = this.Pokemon2.asObservable();
 
-  shareFight$: Observable<pokemonfight> = this.Fight1.asObservable();
-  shareFight2$: Observable<pokemonfight> = this.Fight2.asObservable();
 
   constructor(private service: PokemonAPIService) { }
 
@@ -60,9 +62,10 @@ export class PokemonFightService {
         php1: ((this.Fight2_sub.currenthp1 - this.list[0].attack) * 100) / this.Fight2_sub.maxhp1,
         currenthp1: this.Fight2_sub.currenthp1 - 10
       })
-      if (this.Fight2_sub.currenthp1 < 0) {
+      if (this.Fight2_sub.currenthp1 < 0 ) {
         this.play = true
       }
+      this.listAction.push({action:"test", color:"red"})
       await new Promise(f => setTimeout(f, 1000));
       this.setDataFight({
         lvl1: this.Fight1_sub.lvl1,
@@ -70,9 +73,9 @@ export class PokemonFightService {
         php1: ((this.Fight1_sub.currenthp1 - this.list[0].attack) * 100) / this.Fight1_sub.maxhp1,
         currenthp1: this.Fight1_sub.currenthp1 - 10
       })
-      if (this.Fight1_sub.currenthp1 < 0) {
+      if (this.Fight1_sub.currenthp1 < 0 ) {
         this.play = true
-      }
+      } 
     }
     console.log(this.Fight2_sub.currenthp1)
     return ob

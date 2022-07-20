@@ -201,3 +201,8 @@ export interface MovesPokemon {
     name : string;
     attack : number;
 }
+
+export interface listFight {
+   action : string;
+   color  : string;
+}

@@ -52,15 +52,9 @@ export class PageFightComponent implements OnInit {
           php1: 100,
           currenthp1: response.stats[0].base_stat,
         })
+        this.fight.test()
       },
       error: console.error
     })
-
-    
-    //console.log(this.fight.Fight1_sub.currenthp1)
-    this.fight.test()
-    console.log('test')
-
-
   }
 }

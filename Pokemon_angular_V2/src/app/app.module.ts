@@ -22,6 +22,7 @@ import { PageFightComponent } from './page-fight/page-fight.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CardinfopokemonComponent } from './cardinfopokemon/cardinfopokemon.component';
+import { LoggerFightComponent } from './logger-fight/logger-fight.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CardinfopokemonComponent } from './cardinfopokemon/cardinfopokemon.comp
     InputChooseComponent,
     PageFightComponent,
     CardinfopokemonComponent,
+    LoggerFightComponent,
   ],
   imports: [
     BrowserModule,

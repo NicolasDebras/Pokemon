@@ -1,0 +1,5 @@
+<mat-card>
+    <mat-card-content *ngFor="let item of listAction">
+        <p [ngStyle]="{'color':item.color}">{{item.action}}</p>
+    </mat-card-content>
+</mat-card>
