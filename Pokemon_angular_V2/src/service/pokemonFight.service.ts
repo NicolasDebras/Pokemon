@@ -125,7 +125,7 @@ export class PokemonFightService {
     return 1
   }
 
-  
+
   reciveDomagePokemon1(indexMove: number) : number {
     let Dommage = this.dommage(this.Pokemon2_sub.types[0].type.name, this.Pokemon1_sub.types[0].type.name, this.list[indexMove].attack)
     this.setDataFight({
@@ -150,5 +150,6 @@ export class PokemonFightService {
     return dommage  * this.type_matchups[index][index2]
   }
 
+  
 
 } 
