@@ -20,6 +20,8 @@ export class PageFightComponent implements OnInit {
   url_pokemon1: string = ""
   url_pokemon2: string = ""
   alive_pokemon1 : boolean = true
+  alive_pokemon2 : boolean = true
+
 
   constructor(private router: Router, private service: PokemonAPIService
     , private fight: PokemonFightService) { }
@@ -57,5 +59,6 @@ export class PageFightComponent implements OnInit {
       },
       error: console.error
     })
+    
   }
 }

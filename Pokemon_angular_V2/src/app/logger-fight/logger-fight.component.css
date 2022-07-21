@@ -1,3 +1,5 @@
 .info2 {
     border-style: solid;
+    height: calc( 100vh - 600px );
+    overflow-y: scroll;
 }
