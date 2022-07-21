@@ -25,6 +25,8 @@ export class PokemonFightService {
   Fight2_sub!: pokemonfight;
 
   play: boolean = false
+  is_alive_pokemon1 : boolean = true
+  is_alive_pokemon2 : boolean = true
 
   private list: MovesPokemon[] = [{ name: "charge", attack: 10 }, {name:"Queue de fer", attack: 10.5}, 
   {name:"vive attaque", attack: 12.5},  ]
@@ -84,15 +86,19 @@ export class PokemonFightService {
     let ob = new Observable<Pokemon>()
     while (!this.play) {
       if (this.Pokemon2_sub.stats[5].base_stat < this.Pokemon1_sub.stats[5].base_stat) {
-        this.reciveDomagePokemon1(0);
+        if (this.reciveDomagePokemon1(0) == 0)
+          break;
         await new Promise(f => setTimeout(f, 1000));
-        this.reciveDomagePokemon2(0)
+        if (this.reciveDomagePokemon2(0) == 0)
+          break;
         await new Promise(f => setTimeout(f, 1000));
       }
       else {
-        this.reciveDomagePokemon2(0);
+        if (this.reciveDomagePokemon2(0) == 0)
+          break;
         await new Promise(f => setTimeout(f, 1000));
-        this.reciveDomagePokemon1(0)
+        if (this.reciveDomagePokemon1(0) == 0)
+          break;
         await new Promise(f => setTimeout(f, 1000));
       }
     }
@@ -101,7 +107,7 @@ export class PokemonFightService {
 
   }
 
-  reciveDomagePokemon2(indexMove: number) {
+  reciveDomagePokemon2(indexMove: number) : number{
     let Dommage = this.dommage(this.Pokemon1_sub.types[0].type.name, this.Pokemon2_sub.types[0].type.name, this.list[indexMove].attack)
     this.setDataFight2({
       lvl1: this.Fight2_sub.lvl1,
@@ -111,12 +117,16 @@ export class PokemonFightService {
     })
     if (this.Fight2_sub.currenthp1 < 0) {
       this.play = true
-      this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " Gagne le combat ", color: "blue" })
-      return
+      this.listAction.push({ action: this.Pokemon1_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "red" })
+      this.listAction.push({ action: this.Pokemon1_sub.name.toUpperCase() + " Gagne le combat ", color: "blue" })
+      return 0
     }
-    this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "red" })
+    this.listAction.push({ action: this.Pokemon1_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "red" })
+    return 1
   }
-  reciveDomagePokemon1(indexMove: number) {
+
+  
+  reciveDomagePokemon1(indexMove: number) : number {
     let Dommage = this.dommage(this.Pokemon2_sub.types[0].type.name, this.Pokemon1_sub.types[0].type.name, this.list[indexMove].attack)
     this.setDataFight({
       lvl1: this.Fight1_sub.lvl1,
@@ -126,10 +136,13 @@ export class PokemonFightService {
     })
     if (this.Fight1_sub.currenthp1 < 0) {
       this.play = true
+      this.is_alive_pokemon1 = false
+      this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "green" })
       this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " Gagne le combat ", color: "blue" })
-      return
+      return 0
     }
-    this.listAction.push({ action: this.Pokemon1_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "green" })
+    this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "green" })
+    return 1
   }
   dommage(type1 : string, type2 : string,  dommage : number) : number{
     let index = this.type_names.indexOf(type1)
