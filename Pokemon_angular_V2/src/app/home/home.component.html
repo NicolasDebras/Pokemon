@@ -10,10 +10,10 @@
 <body>
     <mat-grid-list cols="2" rowHeight="45vh">
         <mat-grid-tile>
-            <app-card-select (idlvl)="selectPokemon1($event)"></app-card-select>
+            <app-card-select (idlvl)="selectPokemon1($event)" [num]="'1'"></app-card-select>
         </mat-grid-tile>
         <mat-grid-tile>
-            <app-card-select (idlvl)="selectPokemon2($event)"></app-card-select>
+            <app-card-select (idlvl)="selectPokemon2($event)" [num]="'2'"></app-card-select>
         </mat-grid-tile>
         <mat-grid-tile colspan="2"><button mat-button color="warn" (click)="startfight()">START FIGHT</button>
         </mat-grid-tile>

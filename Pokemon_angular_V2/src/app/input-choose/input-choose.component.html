@@ -1,1 +1,14 @@
-<input #find (change)="findPokemon(find.value)">
+<!--input #find (change)="findPokemon(find.value)">-->
+
+    <input type="text"
+           placeholder="Choisir un Pokemon"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           matInput [(ngModel)]="selectedData"
+           >
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onSelected()">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>

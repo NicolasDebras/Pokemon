@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -11,12 +11,13 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class CardSelectComponent implements OnInit {
 
-  num : string  = "1"
+  //num : string  = "1"
   selectpokemonB : boolean = false;
   id : string = ""
   thumbLabel = false
   value: number = 1
   @Output() idlvl = new EventEmitter<string>()
+  @Input() num!: string;
 
   constructor() {}
 
