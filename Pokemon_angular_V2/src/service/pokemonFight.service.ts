@@ -26,7 +26,8 @@ export class PokemonFightService {
 
   play: boolean = false
 
-  private list: MovesPokemon[] = [{ name: "charge", attack: 10 }]
+  private list: MovesPokemon[] = [{ name: "charge", attack: 10 }, {name:"Queue de fer", attack: 10.5}, 
+  {name:"vive attaque", attack: 12.5},  ]
 
   private type_names: string[] = ["normal", "fighting", "flying", "poison", "ground", "rock",
     "bug", "ghost", "steel", "fire", "water", "grass", "electric",
@@ -78,7 +79,6 @@ export class PokemonFightService {
     this.Fight2_sub = updatedData;
   }
 
-  toto: number = 10;
 
   async test(): Promise<Observable<Pokemon>> {
     let ob = new Observable<Pokemon>()
@@ -111,6 +111,8 @@ export class PokemonFightService {
     })
     if (this.Fight2_sub.currenthp1 < 0) {
       this.play = true
+      this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " Gagne le combat ", color: "blue" })
+      return
     }
     this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "red" })
   }
@@ -124,6 +126,8 @@ export class PokemonFightService {
     })
     if (this.Fight1_sub.currenthp1 < 0) {
       this.play = true
+      this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " Gagne le combat ", color: "blue" })
+      return
     }
     this.listAction.push({ action: this.Pokemon1_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "green" })
   }
