@@ -27,7 +27,7 @@ export class PokemonFightService {
   play: boolean = false
 
   private list: MovesPokemon[] = [{ name: "charge", attack: 10 }, {name:"Queue de fer", attack: 10.5}, 
-  {name:"vive attaque", attack: 12.5},  ]
+  {name:"vive attaque", attack: 12.5},  {name:"Jet de sable", attack: 8.78}, { name: "charge", attack: 10 }]
 
   private type_names: string[] = ["normal", "fighting", "flying", "poison", "ground", "rock",
     "bug", "ghost", "steel", "fire", "water", "grass", "electric",
@@ -79,20 +79,31 @@ export class PokemonFightService {
     this.Fight2_sub = updatedData;
   }
 
+  playFight() {
+    this.play = false;
+  }
+
+  pauseFight() {
+    this.play = true;
+  }
 
   async test(): Promise<Observable<Pokemon>> {
     let ob = new Observable<Pokemon>()
+
+
     while (!this.play) {
+      var randomNumber_1 = Math.floor(Math.random() * this.list.length);
+      var randomNumber_2 = Math.floor(Math.random() * this.list.length);
       if (this.Pokemon2_sub.stats[5].base_stat < this.Pokemon1_sub.stats[5].base_stat) {
-        this.reciveDomagePokemon1(0);
+        this.reciveDomagePokemon1(randomNumber_1);
         await new Promise(f => setTimeout(f, 1000));
-        this.reciveDomagePokemon2(0)
+        this.reciveDomagePokemon2(randomNumber_2)
         await new Promise(f => setTimeout(f, 1000));
       }
       else {
-        this.reciveDomagePokemon2(0);
+        this.reciveDomagePokemon2(randomNumber_1);
         await new Promise(f => setTimeout(f, 1000));
-        this.reciveDomagePokemon1(0)
+        this.reciveDomagePokemon1(randomNumber_2)
         await new Promise(f => setTimeout(f, 1000));
       }
     }

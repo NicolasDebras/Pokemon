@@ -23,8 +23,17 @@ export class PageFightComponent implements OnInit {
   alive_pokemon2 : boolean = true
 
 
-  constructor(private router: Router, private service: PokemonAPIService
-    , private fight: PokemonFightService) { }
+  constructor(private router: Router, private service: PokemonAPIService, private fight: PokemonFightService) { }
+
+  playFight() {
+    this.fight.playFight();
+    this.fight.test()
+
+  }
+
+  pauseFight() {
+    this.fight.pauseFight();
+  }
 
   ngOnInit(): void {
     let tab = this.router.url.split('/')
@@ -36,9 +45,9 @@ export class PageFightComponent implements OnInit {
         this.fight.setData(response)
         this.fight.setDataFight({
           lvl1: this.id1.split('-')[1],
-          maxhp1: response.stats[0].base_stat,
+          maxhp1: response.stats[0].base_stat+ 2*parseInt(this.id1.split('-')[1]),
           php1: 100,
-          currenthp1: response.stats[0].base_stat,
+          currenthp1: response.stats[0].base_stat + 2*parseInt(this.id1.split('-')[1]),
         })
         this.url_pokemon1 = response.sprites.front_default
       },
@@ -51,14 +60,26 @@ export class PageFightComponent implements OnInit {
         this.url_pokemon2 = response.sprites.back_default;
         this.fight.setDataFight2({
           lvl1: this.id2.split('-')[1],
-          maxhp1: response.stats[0].base_stat,
+          maxhp1: response.stats[0].base_stat + 2*parseInt(this.id2.split('-')[1]),
           php1: 100,
-          currenthp1: response.stats[0].base_stat,
+          currenthp1: response.stats[0].base_stat + 2*parseInt(this.id2.split('-')[1]),
         })
         this.fight.test()
       },
       error: console.error
     })
-    
+
+    this.fight.shareFight$.subscribe(response => {
+      if(response.php1<=0){
+        this.alive_pokemon1 = false;
+      }
+    })
+
+    this.fight.shareFight2$.subscribe(response => {
+      if(response.php1<=0){
+        this.alive_pokemon2 = false;
+      }
+    })
+
   }
 }

@@ -1,8 +1,9 @@
+
 <mat-grid-list cols="4" rowHeight="80vh">
     <mat-grid-tile colspan="3" class="test">
         <div class="picturepokemon">
-            <img src={{url_pokemon1}} class="img-top1">
-            <img src={{url_pokemon2}} class="img-top">
+            <img *ngIf="alive_pokemon1" src={{url_pokemon1}} class="img-top1">
+            <img *ngIf="alive_pokemon2" src={{url_pokemon2}} class="img-top">
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
@@ -13,3 +14,5 @@
         </div>
     </mat-grid-tile>
 </mat-grid-list>
+<button mat-button color="warn" (click)="playFight()">Play</button>
+<button mat-button color="warn" (click)="pauseFight()">Pause</button>

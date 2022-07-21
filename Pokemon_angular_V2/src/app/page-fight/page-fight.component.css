@@ -1,5 +1,6 @@
 .card {
     size: 150%;
+    width: ( 100vh - 600px ) / 2;
 
 }
 
