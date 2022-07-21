@@ -26,10 +26,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Pokemon_angular_V2');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Pokemon_angular_V2 app is running!');
-  });
 });

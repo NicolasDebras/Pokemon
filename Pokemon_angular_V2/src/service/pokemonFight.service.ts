@@ -56,7 +56,7 @@ export class PokemonFightService {
 
 
 
-  constructor(private service: PokemonAPIService) { }
+  constructor() { }
 
   setData(updatedData: Pokemon) {
     this.Pokemon1.next(updatedData);
@@ -102,35 +102,35 @@ export class PokemonFightService {
   }
 
   reciveDomagePokemon2(indexMove: number) {
+    let Dommage = this.dommage(this.Pokemon1_sub.types[0].type.name, this.Pokemon2_sub.types[0].type.name, this.list[indexMove].attack)
     this.setDataFight2({
       lvl1: this.Fight2_sub.lvl1,
       maxhp1: this.Fight2_sub.maxhp1,
-      php1: ((this.Fight2_sub.currenthp1 - this.list[indexMove].attack) * 100) / this.Fight2_sub.maxhp1,
-      currenthp1: this.Fight2_sub.currenthp1 - this.list[indexMove].attack
+      php1: ((this.Fight2_sub.currenthp1 - Dommage) * 100) / this.Fight2_sub.maxhp1,
+      currenthp1: this.Fight2_sub.currenthp1 - Dommage
     })
-    this.dommage(this.Pokemon1_sub.types[0].type.name, this.Pokemon1_sub.types[0].type.name, 1)
     if (this.Fight2_sub.currenthp1 < 0) {
       this.play = true
     }
     this.listAction.push({ action: this.Pokemon2_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "red" })
   }
   reciveDomagePokemon1(indexMove: number) {
+    let Dommage = this.dommage(this.Pokemon2_sub.types[0].type.name, this.Pokemon1_sub.types[0].type.name, this.list[indexMove].attack)
     this.setDataFight({
       lvl1: this.Fight1_sub.lvl1,
       maxhp1: this.Fight1_sub.maxhp1,
-      php1: ((this.Fight1_sub.currenthp1 - this.list[indexMove].attack) * 100) / this.Fight1_sub.maxhp1,
-      currenthp1: this.Fight1_sub.currenthp1 - this.list[indexMove].attack
+      php1: ((this.Fight1_sub.currenthp1 - Dommage) * 100) / this.Fight1_sub.maxhp1,
+      currenthp1: this.Fight1_sub.currenthp1 - Dommage
     })
     if (this.Fight1_sub.currenthp1 < 0) {
       this.play = true
     }
     this.listAction.push({ action: this.Pokemon1_sub.name.toUpperCase() + " utilise " + this.list[indexMove].name.toUpperCase(), color: "green" })
   }
-  dommage(type1 : string, type2 : string,  dommage : number) {
+  dommage(type1 : string, type2 : string,  dommage : number) : number{
     let index = this.type_names.indexOf(type1)
     let index2 = this.type_names.indexOf(type2)
-    console.log(index)
-    console.log(index2)
+    return dommage  * this.type_matchups[index][index2]
   }
 
 
